@@ -1,5 +1,8 @@
-# Getting Started
+# Spring Cloud API Gateway + Netflix Eureka
 
+This is a demo project of Spring Cloud API Gateway and Netflix Eureka
+
+Code: L3 - 1 - 2
 
 ## Architecture
 ![](architecture.png)
