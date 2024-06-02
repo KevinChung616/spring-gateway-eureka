@@ -1,7 +1,23 @@
 # Getting Started
 
 
+## Architecture
+![](architecture.png)
 
+| Component     | role                        |
+|---------------|-----------------------------|
+| gateway       | API Gateway                 |
+| eureka server | Service Registry            |
+| order service | business logic about orders |
+
+
+**Tech Stack**
+
++ Spring Cloud Netflix Eureka
++ Spring Cloud API Gateway
++ Spring Cloud API Gateway Built-in Load Balancer
++ Spring Boot 3
++ Maven (Parent Children Project)
 
 ## Tutorial
 
