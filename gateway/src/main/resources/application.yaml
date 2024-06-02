@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: GATEWAY-SERVICE
+
+  cloud:
+    gateway:
+      routes:
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE/ # service name
+          predicates:
+            - Path=/order-service/** # url pattern
+          filters:
+            - StripPrefix=1
+      discovery:
+        locator:
+          lower-case-service-id: false
+server:
+  port: 8966
+
+#The Gateway will also be registered at the Eureka server
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG

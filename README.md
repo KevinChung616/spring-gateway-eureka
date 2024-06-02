@@ -6,9 +6,6 @@
 ## Tutorial
 
 
-
-
-
 ### Eureka - Server 
 
 Add dependency
@@ -115,3 +112,48 @@ Eureka - 3
 ```
 ![](fixed-replicas.png)
 ---
+
+
+## Common Q&A
+
+Q: When redirect request from gateway, request auto add service name in the request. For example, expecting redirect to `/orders`, but redirect to `/ORDER-SERVICE/orders`
+A: Add following config in gateway application.yaml to strip 1st level
+```yaml
+spring:
+  application:
+    name: GATEWAY-SERVICE
+
+  cloud:
+    gateway:
+      routes:
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE/ # service name
+          predicates:
+            - Path=/order-service/** # url pattern
+          filters:
+            - StripPrefix=1
+```
+
+Reference: https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway/gatewayfilter-factories/stripprefix-factory.html
+
+
+Q: My service is registered as uppercase, but spring cloud gateway auto converts to lower case during route matching causing service not found
+A: add following config
+```yaml
+spring:
+  application:
+    name: GATEWAY-SERVICE
+
+  cloud:
+    gateway:
+      routes:
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE/ # service name
+          predicates:
+            - Path=/order-service/** # url pattern
+          filters:
+            - StripPrefix=1
+      discovery:
+        locator:
+          lower-case-service-id: false
+```
