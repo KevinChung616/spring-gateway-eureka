@@ -5,7 +5,6 @@
 
 ## Tutorial
 
-
 ### Eureka - Server 
 
 Add dependency
@@ -134,7 +133,9 @@ spring:
             - StripPrefix=1
 ```
 
-Reference: https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway/gatewayfilter-factories/stripprefix-factory.html
+Reference: 
++ https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway/gatewayfilter-factories/stripprefix-factory.html
++ + https://cloud.spring.io/spring-cloud-gateway/reference/html/#gatewayfilter-factories
 
 
 Q: My service is registered as uppercase, but spring cloud gateway auto converts to lower case during route matching causing service not found
@@ -155,5 +156,7 @@ spring:
             - StripPrefix=1
       discovery:
         locator:
-          lower-case-service-id: false
+          lower-case-service-id: false # lowercase set as false
 ```
+Reference:
++ https://stackoverflow.com/questions/73674870/spring-cloud-api-gateway-spring-cloud-gateway-discovery-locator-lower-case-ser
